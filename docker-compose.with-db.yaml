@@ -2,6 +2,7 @@ services:
   kong:
     image: kong:3.7
     restart: on-failure:10
+    # network_mode: "host"
     ports:
       - 8000:8000
       - 8443:8443
@@ -28,7 +29,7 @@ services:
 
   db:
     image: postgres:13-alpine
-    network_mode: "host"
+    # network_mode: "host"
     ports:
       - 5432:5432
     environment:
@@ -43,6 +44,7 @@ services:
 
   kong-migrations:
     image: kong:3.7
+    # network_mode: "host"
     command: kong migrations bootstrap
     environment:
       KONG_DATABASE: postgres
